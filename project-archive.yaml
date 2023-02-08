@@ -1,0 +1,26 @@
+## project-archive.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: project-archive-storage-volume
+spec:
+  capacity:
+    storage: 3700Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: project-archive
+  hostPath:
+    path: "/media/nvme2-3.7TiB"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: project-archive-storage-claim
+spec:
+  storageClassName: project-archive
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3700Gi

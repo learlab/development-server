@@ -1,0 +1,26 @@
+## active-projects.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: active-projects-storage-volume
+spec:
+  capacity:
+    storage: 3700Gi 
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: active-projects 
+  hostPath:
+    path: "/media/nvme1-3.7TiB"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: active-projects-storage-claim
+spec:
+  storageClassName: active-projects
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3700Gi
