@@ -1,4 +1,4 @@
-# development-server
+# Learlab Development Server Configuration and Documentation!
 
 In this repository, you will find configuration files for our lab server.
 
