@@ -5,14 +5,16 @@ hub:
       admin_access: false
     Authenticator:
       admin_users:
-        - langdon.holmes
-        - wesley.morris
+        - langdon-holmes
+        - wesley-morris
     NativeAuthenticator:
       enable_signup: true
       minimum_password_length: 8
       check_common_password: true
       ask_email_on_signup: true
       allow_2fa: false
+  containerSecurityContext:
+    allowPrivilegeEscalation: true
 proxy:
   https:
     enabled: false
@@ -31,6 +33,7 @@ singleuser:
     GRANT_SUDO: "yes"
     NOTEBOOK_ARGS: "--allow-root"
   uid: 0
+  allowPrivilegeEscalation: True
   cmd: start-singleuser.sh
   image:
     name: langdonholmes/base-nlp
@@ -69,3 +72,5 @@ ingress:
   enabled: true
   hosts:
     - selnx-47ymrt3.vuds.vanderbilt.edu
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
