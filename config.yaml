@@ -20,12 +20,12 @@ proxy:
     enabled: false
     hosts:
       - selnx-47ymrt3.vuds.vanderbilt.edu
-    letsencrypt:
-      contactEmail: langdon.holmes@vanderbilt.edu
   service:
     loadBalancerIP: 10.0.0.150
 cull:
-  enabled: false
+  enabled: true
+  timeout: 10800
+  every: 600
 singleuser:
   defaultUrl: "/lab"
   extraEnv:
@@ -37,7 +37,8 @@ singleuser:
   cmd: start-singleuser.sh
   image:
     name: langdonholmes/base-nlp
-    tag: latest
+    tag: "cuda-11.7"
+    pullPolicy: "Always"
   profileList:
     - display_name: "Normal Server"
       description: "Spawns a notebook server with no GPU access"
@@ -46,9 +47,9 @@ singleuser:
       kubespawner_override:
         image: langdonholmes/rstudio
         default_url: "/rstudio"
-        pullPolicy: Always
+        pullPolicy: "Always"
     - display_name: "GPU Server"
-      description: "Spawns a notebook server with access to the GPU. There can be only one at a time."
+      description: "Spawns a notebook server with GPU access."
       kubespawner_override:
         extra_resource_limits:
           nvidia.com/gpu: "1"
