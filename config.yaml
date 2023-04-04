@@ -13,6 +13,7 @@ hub:
       check_common_password: true
       ask_email_on_signup: true
       allow_2fa: false
+      tos: "Your password must include a non-alphanumeric character. You must change your password every 3 months. Unauthorized access to data (individually identifiable information) on this computer is a violation of federal law and will result in prosecution. Do you wish to continue?"
   containerSecurityContext:
     allowPrivilegeEscalation: true
 proxy:
