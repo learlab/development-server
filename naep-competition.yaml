@@ -1,0 +1,26 @@
+## active-projects.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: naep-competition-volume 
+spec:
+  capacity:
+    storage: 200Gi 
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: naep-competition
+  hostPath:
+    path: "/media/naep-competition"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: naep-competition-storage-claim
+spec:
+  storageClassName: naep-competition 
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Gi
