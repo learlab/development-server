@@ -1,8 +1,7 @@
-from kubernetes import client
 from kubespawner.utils import get_k8s_model
-from kubernetes.client.models import ( V1Volume, V1VolumeMount )
+from kubernetes_asyncio.client.models import ( V1Volume, V1VolumeMount )
 
-naep-competition = {
+naep_competition = {
   'name': 'naep-competition',
   'pvc': 'naep-competition-storage-claim',
   'mountPath': '/home/jovyan/naep-competition',
@@ -10,15 +9,14 @@ naep-competition = {
 }
 
 user_volume_map = {
-  'langdon-holmes': [naep-competition],
-  'scott-crossley': [naep-competition],
-  'wesley-morris': [naep-competition]
+  'langdon-holmes': [naep_competition],
+  'scott-crossley': [naep_competition],
+  'wesley-morris': [naep_competition]
 }
 
 def modify_pod_hook(spawner, pod):
     try:
         user = spawner.user.name
-        spawner.log.info("User name is: " + str(user))
         if user in user_volume_map:
             for volume in user_volume_map[user]:
                 pod.spec.volumes.append(
