@@ -16,6 +16,9 @@ hub:
       tos: "Your password must include a non-alphanumeric character. You must change your password every 3 months. Unauthorized access to data (individually identifiable information) on this computer is a violation of federal law and will result in prosecution. Do you wish to continue?"
   containerSecurityContext:
     allowPrivilegeEscalation: true
+  extraFiles:
+    custom_pod_hook:
+      mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/custom_pod_hook.py
 proxy:
   https:
     enabled: false
