@@ -11,7 +11,8 @@ naep_competition = {
 user_volume_map = {
   'langdon-holmes': [naep_competition],
   'scott-crossley': [naep_competition],
-  'wesley-morris': [naep_competition]
+  'wesley-morris': [naep_competition],
+  'learlab': [naep_competition],
 }
 
 def modify_pod_hook(spawner, pod):

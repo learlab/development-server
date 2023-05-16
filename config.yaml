@@ -41,7 +41,7 @@ singleuser:
   cmd: start-singleuser.sh
   image:
     name: langdonholmes/base-nlp
-    tag: "cuda-11.7"
+    tag: "cuda-11.8"
     pullPolicy: "Always"
   profileList:
     - display_name: "Normal Server"

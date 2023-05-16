@@ -5,13 +5,13 @@ metadata:
   name: project-archive-storage-volume
 spec:
   capacity:
-    storage: 3700Gi
+    storage: 2000Gi
   accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: project-archive
   hostPath:
-    path: "/media/nvme2-3.7TiB"
+    path: "/media/nvme2-3.7TiB/project-archive"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -23,4 +23,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 3700Gi
+      storage: 2000Gi
