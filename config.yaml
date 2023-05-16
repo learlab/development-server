@@ -56,7 +56,7 @@ singleuser:
       description: "Spawns a notebook server with GPU access."
       kubespawner_override:
         extra_resource_limits:
-          nvidia.com/gpu: "1"
+          nvidia.com/gpu: "2"
         extra_resource_guarantees:
           nvidia.com/gpu: "1"
   storage:
