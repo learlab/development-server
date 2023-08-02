@@ -20,19 +20,19 @@ hub:
     custom_pod_hook:
       mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/custom_pod_hook.py
 proxy:
-#  https:
-#    enabled: true
-#    hosts:
-#      - jupyter.learlab.vanderbilt.edu
-#    type: secret
-#    secret:
-#      name: testkey
+  https:
+    enabled: true
+    #    hosts:
+    #      - jupyter.learlab.vanderbilt.edu
+    #    type: secret
+    #    secret:
+    #      name: testkey
   service:
-#    type: NodePort
-#    nodePorts:
-#      http: 30080
+    type: NodePort
+    nodePorts:
+      http: 30002
 #      https: 30443
-    loadBalancerIP: 10.0.0.150
+#    loadBalancerIP: 10.1.221.75
 cull:
   enabled: true
   timeout: 10800
@@ -82,7 +82,7 @@ singleuser:
         mountPath: /home/jovyan/project-archive
 ingress:
   enabled: true
-#  hosts:
-#    - jupyter.learlab.vanderbilt.edu
+  #  hosts:
+  #    - jupyter.learlab.vanderbilt.edu
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
