@@ -13,26 +13,17 @@ hub:
       check_common_password: true
       ask_email_on_signup: true
       allow_2fa: false
-      tos: "Your password must include a non-alphanumeric character. You must change your password every 3 months. Unauthorized access to data (individually identifiable information) on this computer is a violation of federal law and will result in prosecution. Do you wish to continue?"
+      tos: "Unauthorized access to data (individually identifiable information) on this computer is a violation of federal law and will result in prosecution. Do you wish to continue?"
   containerSecurityContext:
     allowPrivilegeEscalation: true
-  extraFiles:
-    custom_pod_hook:
-      mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/custom_pod_hook.py
+#  extraFiles:
+#    custom_pod_hook:
+#      mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/custom_pod_hook.py
 proxy:
-  https:
-    enabled: true
-    #    hosts:
-    #      - jupyter.learlab.vanderbilt.edu
-    #    type: secret
-    #    secret:
-    #      name: testkey
   service:
     type: NodePort
     nodePorts:
-      http: 30002
-#      https: 30443
-#    loadBalancerIP: 10.1.221.75
+      http: 30000
 cull:
   enabled: true
   timeout: 10800
@@ -63,7 +54,7 @@ singleuser:
       description: "Spawns a notebook server with GPU access."
       kubespawner_override:
         extra_resource_limits:
-          nvidia.com/gpu: "2"
+          nvidia.com/gpu: "1"
         extra_resource_guarantees:
           nvidia.com/gpu: "1"
   storage:
@@ -71,10 +62,10 @@ singleuser:
     extraVolumes:
       - name: jupyterhub-active-projects
         persistentVolumeClaim:
-          claimName: active-projects-storage-claim
+          claimName: active-projects
       - name: jupyterhub-project-archive
         persistentVolumeClaim:
-          claimName: project-archive-storage-claim
+          claimName: project-archive
     extraVolumeMounts:
       - name: jupyterhub-active-projects
         mountPath: /home/jovyan/active-projects
@@ -82,7 +73,7 @@ singleuser:
         mountPath: /home/jovyan/project-archive
 ingress:
   enabled: true
-  #  hosts:
-  #    - jupyter.learlab.vanderbilt.edu
+  hosts:
+    - jupyter.learlab.vanderbilt.edu
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"

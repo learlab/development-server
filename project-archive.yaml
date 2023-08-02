@@ -1,24 +1,20 @@
 ## project-archive.yaml
-apiVersion: v1
-kind: PersistentVolume
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
 metadata:
-  name: project-archive-storage-volume
-spec:
-  capacity:
-    storage: 2000Gi
-  accessModes:
-  - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: project-archive
-  hostPath:
-    path: "/media/nvme2-3.7TiB/project-archive"
+  name: project-archive-hostpath
+provisioner: microk8s.io/hostpath
+reclaimPolicy: Retain
+parameters:
+  pvDir: /media/nvme2-3.7TiB/project-archive
+volumeBindingMode: Immediate
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: project-archive-storage-claim
+  name: project-archive
 spec:
-  storageClassName: project-archive
+  storageClassName: project-archive-hostpath
   accessModes:
     - ReadWriteOnce
   resources:

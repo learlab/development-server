@@ -1,24 +1,21 @@
 ## active-projects.yaml
-apiVersion: v1
-kind: PersistentVolume
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
 metadata:
-  name: active-projects-storage-volume
-spec:
-  capacity:
-    storage: 3700Gi 
-  accessModes:
-  - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: active-projects 
-  hostPath:
-    path: "/media/nvme1-3.7TiB"
+  name: active-projects-hostpath
+provisioner: microk8s.io/hostpath
+reclaimPolicy: Retain
+parameters:
+  pvDir: /mnt/media/nvme1-3.7TiB/active-projects
+volumeBindingMode: Immediate
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: active-projects-storage-claim
+  name: active-projects
 spec:
-  storageClassName: active-projects
+  storageClassName: active-projects-hostpath
   accessModes:
     - ReadWriteOnce
   resources:
