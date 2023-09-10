@@ -7,7 +7,7 @@ metadata:
 provisioner: microk8s.io/hostpath
 reclaimPolicy: Retain
 parameters:
-  pvDir: /mnt/media/nvme1-3.7TiB/active-projects
+  pvDir: /media/nvme1-3.7TiB
 volumeBindingMode: Immediate
 ---
 apiVersion: v1

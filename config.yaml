@@ -16,7 +16,9 @@ hub:
       tos: "Unauthorized access to data (individually identifiable information) on this computer is a violation of federal law and will result in prosecution. Do you wish to continue?"
   containerSecurityContext:
     allowPrivilegeEscalation: true
-#  extraFiles:
+  extraFiles:
+    options_form:
+      mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/custom_options_form.py
 #    custom_pod_hook:
 #      mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/custom_pod_hook.py
 proxy:
@@ -40,7 +42,7 @@ singleuser:
   image:
     name: langdonholmes/base-nlp
     tag: "cuda-11.8"
-    pullPolicy: "Always"
+    pullPolicy: "IfNotPresent"
   profileList:
     - display_name: "Normal Server"
       description: "Spawns a notebook server with no GPU access"

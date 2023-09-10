@@ -21,29 +21,38 @@
 async def custom_options_form(spawner):
     # See the pre_spawn_hook example for more ways to get information about the
     # user
-    auth_state = await spawner.user.get_auth_state()
-    user_details = auth_state["oauth_user"]
-    gpu_access = user_details.get("gpu_access", False)
-
+    gpu_available = True
+    print(spawner.pod_reflector())
     # Declare the common profile list for all users
     spawner.profile_list = [
         {
             'display_name': 'CPU server',
+            'description': 'A normal server',
             'slug': 'cpu',
             'default': True,
         },
+        {
+            'display_name': 'RStudio server',
+            'description': 'RStudio interface instead of JupyterLab',
+            'kubespawner_override': {
+                'image': 'langdonholmes/rstudio',
+                'default_url': '/rstudio',
+                'pullPolicy': 'IfNotPresent',
+            }
+        }
     ]
 
     # Dynamically update profile_list based on user
-    if gpu_access:
-        spawner.log.info(f"GPU access options added for {username}.")
+    if gpu_available:
+        spawner.log.info(f"GPU is available.")
         spawner.profile_list.extend(
             [
                 {
                     'display_name': 'GPU server',
                     'slug': 'gpu',
                     'kubespawner_override': {
-                        'image': 'training/datascience:my_tag',
+                        'extra_resource_limits': {'nvidia.com/gpu': '1'},
+                        'extra_resource_guarantees': {'nvidia.com/gpu': '1'},
                     },
                 },
             ]
