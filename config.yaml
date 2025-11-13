@@ -7,6 +7,8 @@ hub:
       admin_users:
         - langdon-holmes
         - wesley-morris
+      allowed_users:
+        - scott-crossley
     NativeAuthenticator:
       enable_signup: true
       minimum_password_length: 8
@@ -16,9 +18,9 @@ hub:
       tos: "Unauthorized access to data (individually identifiable information) on this computer is a violation of federal law and will result in prosecution. Do you wish to continue?"
   containerSecurityContext:
     allowPrivilegeEscalation: true
-  extraFiles:
-    options_form:
-      mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/custom_options_form.py
+#  extraFiles:
+#    options_form:
+#      mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/custom_options_form.py
 #    custom_pod_hook:
 #      mountPath: /usr/local/etc/jupyterhub/jupyterhub_config.d/custom_pod_hook.py
 proxy:
@@ -41,7 +43,7 @@ singleuser:
   cmd: start-singleuser.sh
   image:
     name: langdonholmes/base-nlp
-    tag: "cuda-11.8"
+    tag: "cuda-12.8"
     pullPolicy: "IfNotPresent"
   profileList:
     - display_name: "Normal Server"
@@ -49,9 +51,9 @@ singleuser:
     - display_name: "RStudio Server"
       description: "Spawns an RStudio interface"
       kubespawner_override:
-        image: langdonholmes/rstudio
+        image: "langdonholmes/rstudio:13-11-2025"
         default_url: "/rstudio"
-        pullPolicy: "Always"
+        pullPolicy: "IfNotPresent"
     - display_name: "GPU Server"
       description: "Spawns a notebook server with GPU access."
       kubespawner_override:
