@@ -51,7 +51,7 @@ singleuser:
     - display_name: "RStudio Server"
       description: "Spawns an RStudio interface"
       kubespawner_override:
-        image: "langdonholmes/rstudio:latest"
+        image: "langdonholmes/rstudio@sha256:86a60027c1264a6eeb570e676c930e491d55ded943bb8b428c4630527cafa6a2"
         default_url: "/rstudio"
         pullPolicy: "IfNotPresent"
     - display_name: "GPU Server"
