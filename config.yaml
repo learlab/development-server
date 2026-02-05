@@ -4,11 +4,10 @@ hub:
       authenticator_class: nativeauthenticator.NativeAuthenticator
       admin_access: false
     Authenticator:
+      allow_all: true
       admin_users:
         - langdon-holmes
         - wesley-morris
-      allowed_users:
-        - scott-crossley
     NativeAuthenticator:
       enable_signup: true
       minimum_password_length: 8
@@ -51,7 +50,7 @@ singleuser:
     - display_name: "RStudio Server"
       description: "Spawns an RStudio interface"
       kubespawner_override:
-        image: "langdonholmes/rstudio@sha256:86a60027c1264a6eeb570e676c930e491d55ded943bb8b428c4630527cafa6a2"
+        image: "langdonholmes/rstudio@sha256:b85000c3a7fc54e0962bbcebf8661e502772f2b1a0b4e9d0d8d6ac7c29ad25ce"
         default_url: "/rstudio"
         pullPolicy: "IfNotPresent"
     - display_name: "GPU Server"
