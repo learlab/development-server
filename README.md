@@ -8,3 +8,6 @@ We use JupyterHub to orchestrate containerized development environments. This al
 The [wiki](https://github.com/learlab/development-server/wiki) has useful information for users like where to access the server, how to create an account, how to organize your project resources on the filesystem, and how to create and manage virtual environments.
 
 For system maintainers or folks interested in creating a similar JupyterHub deployment, the wiki also contains deployment documentation.
+
+# Other services on the server
+- [`github-runner/`](github-runner/): the GitHub Actions runner that deploys the iTELL API.
